@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Swapnil Tanpure — Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F7FA; --text:#141D2B; --dim:#5B6B7A;
+    --line:rgba(20,29,43,.16); --line-strong:rgba(20,29,43,.36);
+    --accent:#2F8F82; --accent-soft:#4FA79A;
+    --mono:'JetBrains Mono', ui-monospace, monospace;
+    --sans:'Inter', -apple-system, sans-serif;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0F2338; --text:#E7EEF4; --dim:#8FA3B8;
+      --line:rgba(231,238,244,.10); --line-strong:rgba(231,238,244,.30);
+      --accent:#4FD1C5; --accent-soft:#7FE0D6;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0F2338; --text:#E7EEF4; --dim:#8FA3B8;
+    --line:rgba(231,238,244,.10); --line-strong:rgba(231,238,244,.30);
+    --accent:#4FD1C5; --accent-soft:#7FE0D6;
+  }
+  *{box-sizing:inherit; margin:0; padding:0;}
+  html{scroll-padding-top:calc(58px + env(safe-area-inset-top,0px)); scroll-behavior:smooth;}
+  body{
+    background:
+      linear-gradient(var(--line) 1px, transparent 1px) 0 0/100% 34px,
+      linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0/34px 100%,
+      var(--bg);
+    color:var(--text); font-family:var(--sans); line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--accent); color:var(--bg);}
+  a{color:inherit;}
+  .wrap{max-width:860px; margin:0 auto; padding:0 26px;}
+
+  nav.bar{
+    position:sticky; top:0; z-index:5;
+    padding-top:env(safe-area-inset-top,0px);
+    background:color-mix(in srgb, var(--bg) 90%, transparent);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line-strong);
+  }
+  nav.bar .wrap{display:flex; align-items:center; justify-content:space-between; height:56px;
+    font-family:var(--mono); font-size:13px;}
+  .tag-id{color:var(--accent);}
+  .navlinks{display:flex; gap:22px; color:var(--dim);}
+  .navlinks a{text-decoration:none; transition:color .2s ease;}
+  .navlinks a:hover{color:var(--accent);}
+  @media (max-width:560px){ .navlinks{display:none;} }
+
+  header.hero{padding:88px 0 60px; border-bottom:1px solid var(--line-strong); position:relative;}
+  .status-line{
+    font-family:var(--mono); font-size:13px; color:var(--dim); margin-bottom:20px;
+    display:flex; align-items:center; gap:9px;
+    opacity:0; animation:rise .6s ease forwards .05s;
+  }
+  .dot{width:7px; height:7px; border-radius:50%; background:var(--accent);
+    box-shadow:0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent);
+    animation:pulse 2.4s ease-in-out infinite;}
+  @keyframes pulse{
+    0%,100%{box-shadow:0 0 0 0 color-mix(in srgb, var(--accent) 45%, transparent);}
+    50%{box-shadow:0 0 0 6px color-mix(in srgb, var(--accent) 0%, transparent);}
+  }
+  h1{
+    font-family:var(--mono); font-weight:600; font-size:clamp(32px,6vw,54px);
+    line-height:1.1; letter-spacing:-.01em;
+    opacity:0; animation:rise .7s ease forwards .16s;
+  }
+  .role{
+    font-family:var(--sans); font-weight:500; color:var(--accent);
+    font-size:clamp(16px,2vw,19px); margin-top:14px;
+    opacity:0; animation:rise .7s ease forwards .28s;
+  }
+  .lede{max-width:58ch; font-size:16px; color:var(--dim); margin-top:20px;
+    opacity:0; animation:rise .7s ease forwards .4s;}
+  @keyframes rise{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }
+  @media (prefers-reduced-motion: reduce){
+    .status-line,h1,.role,.lede{animation:none; opacity:1;}
+    .dot{animation:none;}
+  }
+
+  .panel{
+    display:grid; grid-template-columns:repeat(4,1fr);
+    border-bottom:1px solid var(--line-strong);
+  }
+  .panel .cell{padding:24px 22px; border-right:1px dashed var(--line-strong);}
+  .panel .cell:last-child{border-right:none;}
+  .panel .num{font-family:var(--mono); font-size:clamp(22px,3vw,30px); font-weight:700; font-variant-numeric:tabular-nums; color:var(--accent);}
+  .panel .cap{font-family:var(--sans); font-size:12.5px; color:var(--dim); margin-top:6px; line-height:1.4;}
+
+  section{padding:60px 0;}
+  section + section{border-top:1px solid var(--line-strong);}
+  h2{font-family:var(--mono); font-weight:600; font-size:20px; margin-bottom:26px;}
+  h2::before{content:"// "; color:var(--dim);}
+
+  .about p{max-width:62ch; font-size:15.5px; color:var(--dim);}
+  .about p + p{margin-top:14px;}
+
+  .module{
+    border:1px solid var(--line-strong); padding:22px 22px; margin-top:16px;
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .module:first-of-type{margin-top:0;}
+  .module:hover{border-color:var(--accent); background:color-mix(in srgb, var(--accent) 6%, transparent);}
+  .module .tag{font-family:var(--mono); font-size:12px; color:var(--accent);}
+  .module h3{font-family:var(--sans); font-weight:600; font-size:17.5px; margin:8px 0 8px;}
+  .module p{color:var(--dim); font-size:15px; max-width:58ch;}
+  .module .metrics{display:flex; gap:18px; flex-wrap:wrap; margin-top:14px; font-family:var(--mono);}
+  .module .metrics span{font-size:12.5px; color:var(--dim);}
+  .module .metrics b{color:var(--text);}
+
+  .stack-groups{display:grid; grid-template-columns:1fr 1fr; gap:32px;}
+  .stack-groups h4{font-family:var(--mono); font-size:12px; color:var(--dim); margin-bottom:10px;}
+  .pill-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .pill{border:1px solid var(--line-strong); padding:6px 12px; font-family:var(--mono); font-size:13px; transition:border-color .2s ease, color .2s ease;}
+  .pill:hover{border-color:var(--accent); color:var(--accent);}
+
+  footer{border-top:1px solid var(--line-strong); padding:56px 0 84px;}
+  .prompt{font-family:var(--mono); font-size:14px; color:var(--dim); margin-bottom:16px;}
+  .prompt b{color:var(--accent);}
+  footer h2{margin-bottom:14px;}
+  footer p.sub{color:var(--dim); max-width:48ch; font-size:15px; margin-bottom:24px;}
+  .contact-btn{
+    display:inline-block; background:var(--accent); color:var(--bg);
+    font-family:var(--mono); font-weight:600; font-size:14px;
+    padding:13px 24px; text-decoration:none; border:1px solid var(--accent);
+    transition:background .2s ease, color .2s ease;
+  }
+  .contact-btn:hover{background:transparent; color:var(--accent);}
+  .foot-note{margin-top:16px; font-family:var(--mono); font-size:12.5px; color:var(--dim);}
+
+  a:focus-visible, .pill:focus-visible, .contact-btn:focus-visible{
+    outline:2px solid var(--accent); outline-offset:3px;
+  }
+
+  @media (max-width:640px){
+    header.hero{padding:60px 0 40px;}
+    .panel{grid-template-columns:1fr 1fr;}
+    .panel .cell:nth-child(2){border-right:none;}
+    .panel .cell{border-bottom:1px dashed var(--line-strong);}
+    .stack-groups{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="bar">
+  <div class="wrap">
+    <span><span class="tag-id">[ST]</span> tanpure</span>
+    <div class="navlinks">
+      <a href="#about">about</a>
+      <a href="#work">work</a>
+      <a href="#stack">stack</a>
+      <a href="#contact">contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="status-line"><span class="dot"></span> status: active — accepting new roles</div>
+    <h1>Swapnil Tanpure</h1>
+    <div class="role">Software Engineer — backend &amp; data infrastructure</div>
+    <p class="lede">I build the systems that move financial documents and records at scale — reliably, and in a way that holds up to an audit. 2.5+ years in, currently at Zinnia.</p>
+  </header>
+</div>
+
+<div class="panel">
+  <div class="cell"><div class="num">12M+</div><div class="cap">financial records through one event-driven integration</div></div>
+  <div class="cell"><div class="num">450M</div><div class="cap">policy documents under a single storage system</div></div>
+  <div class="cell"><div class="num">700+ TB</div><div class="cap">migrated in AWS S3, audit trail intact</div></div>
+  <div class="cell"><div class="num">40%</div><div class="cap">infrastructure cost reduction from that migration</div></div>
+</div>
+
+<div class="wrap">
+  <section class="about" id="about">
+    <h2>about</h2>
+    <p>I work on backend systems that sit underneath financial document processing — the parts that have to be correct, traceable, and fast, even as the volume climbs into the hundreds of millions. Most of what I build never has a UI; it has to survive an audit instead.</p>
+    <p>Day to day that means Java, C#, and Python, and a lot of time inside Kafka and MongoDB, working alongside a platform engineering team on the connectivity and infrastructure the rest of the org relies on.</p>
+  </section>
+
+  <section class="work" id="work">
+    <h2>selected work</h2>
+
+    <div class="module">
+      <div class="tag">migration</div>
+      <h3>400M+ document migration to AWS S3</h3>
+      <p>Led the technical work of moving a 700+ TB document archive onto a single, consolidated storage system, without breaking the audit and retrieval guarantees financial records require.</p>
+      <div class="metrics">
+        <span><b>400M+</b> documents moved</span>
+        <span><b>700+ TB</b> total volume</span>
+        <span><b>40%</b> lower infra cost</span>
+      </div>
+    </div>
+
+    <div class="module">
+      <div class="tag">integration</div>
+      <h3>Event-driven pipeline for financial records</h3>
+      <p>Built an event-driven integration handling roughly 12 million financial records, designed around strict reliability and audit requirements rather than best-effort delivery.</p>
+      <div class="metrics">
+        <span><b>~12M</b> records processed</span>
+        <span>strict reliability &amp; audit constraints</span>
+      </div>
+    </div>
+
+    <div class="module">
+      <div class="tag">storage</div>
+      <h3>Single source of document storage</h3>
+      <p>Worked as part of the team that established 450 million policy documents as the single source of truth for document storage — the foundation the migration above built on top of.</p>
+      <div class="metrics">
+        <span><b>450M</b> policy documents</span>
+        <span><b>700+ TB</b> in AWS S3</span>
+      </div>
+    </div>
+
+    <div class="module">
+      <div class="tag">platform</div>
+      <h3>Platform engineering support</h3>
+      <p>Partnered with the platform engineering team on Kafka and MongoDB operations and on diagnosing server connectivity issues across services.</p>
+    </div>
+  </section>
+
+  <section class="stack" id="stack">
+    <h2>stack</h2>
+    <div class="stack-groups">
+      <div>
+        <h4>languages</h4>
+        <div class="pill-row">
+          <span class="pill">Java</span>
+          <span class="pill">C#</span>
+          <span class="pill">Python</span>
+        </div>
+      </div>
+      <div>
+        <h4>infrastructure</h4>
+        <div class="pill-row">
+          <span class="pill">Kafka</span>
+          <span class="pill">MongoDB</span>
+          <span class="pill">AWS S3</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="prompt">$ contact <b>--email</b></div>
+    <h2>get in touch</h2>
+    <p class="sub">Open to hearing about backend, data infrastructure, and platform engineering roles.</p>
+    <a class="contact-btn" href="mailto:swapniltanpure74@gmail.com">email me</a>
+    <div class="foot-note">swapniltanpure74@gmail.com</div>
+  </div>
+</footer>
+
+</body>
+</html>
