@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Swapnil Tanpure — Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* colour: 60 canvas / 30 structural surface / 10 single accent */
+    --canvas:#F8F9FA; --surface:#EEF0F2; --raised:#FFFFFF;
+    --text:#16191D; --dim:#565E68;
+    --border:rgba(22,25,29,.10); --border-hover:rgba(22,25,29,.24);
+    --accent:#1C6B50; --on-accent:#FFFFFF;
+    --panel-shadow:0 1px 2px rgba(0,0,0,.05);
+
+    /* type: 3 weights, 3 body sizes, modular scale 1.25 */
+    --font:'IBM Plex Sans', -apple-system, 'Segoe UI', sans-serif;
+    --w-regular:400; --w-medium:500; --w-semibold:600;
+    --t-meta:.75rem; --t-secondary:.875rem; --t-body:1rem;
+    --t-h3:1.25rem; --t-h2:1.5625rem; --t-stat:1.9375rem; --t-name:2.4375rem;
+
+    /* spacing: 8pt major, 4pt micro */
+    --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s6:24px; --s8:32px; --s12:48px; --s16:64px;
+    --prose:68ch;
+
+    /* motion */
+    --m-100:100ms; --m-150:150ms; --m-200:200ms; --m-300:300ms;
+    --ease-out:cubic-bezier(.16,1,.3,1);
+
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --canvas:#0E1013; --surface:#14171B; --raised:#14171B;
+      --text:#E8EBEE; --dim:#98A1AB;
+      --border:rgba(255,255,255,.10); --border-hover:rgba(255,255,255,.24);
+      --accent:#4FBF95; --on-accent:#0E1013;
+      --panel-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+    }
+  }
+  :root[data-theme="dark"]{
+    --canvas:#0E1013; --surface:#14171B; --raised:#14171B;
+    --text:#E8EBEE; --dim:#98A1AB;
+    --border:rgba(255,255,255,.10); --border-hover:rgba(255,255,255,.24);
+    --accent:#4FBF95; --on-accent:#0E1013;
+    --panel-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+  }
+
+  *{box-sizing:inherit; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--canvas); color:var(--text);
+    font-family:var(--font); font-size:var(--t-body); font-weight:var(--w-regular);
+    line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--accent); color:var(--on-accent);}
+  a{color:inherit;}
+  a:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+  ul{list-style:none;}
+
+  h1,h2,h3{font-weight:var(--w-semibold);}
+  h1{font-size:var(--t-name); line-height:1.15; letter-spacing:-.01em;}
+  h2{font-size:var(--t-h2); line-height:1.2; margin-bottom:var(--s6);}
+  h3{font-size:var(--t-h3); line-height:1.25;}
+
+  .layout{display:grid; grid-template-columns:320px minmax(0,1fr); min-height:100vh;}
+
+  /* sidebar: L1 structural surface, one neutral step from canvas */
+  aside{
+    background:var(--surface); border-right:1px solid var(--border);
+    padding:var(--s16) var(--s8) var(--s12);
+  }
+  .role{font-size:var(--t-body); font-weight:var(--w-medium); color:var(--accent); margin-top:var(--s4);}
+  .meta{font-size:var(--t-secondary); color:var(--dim); margin-top:var(--s1);}
+  .side-block{margin-top:var(--s8);}
+  .side-title{font-size:var(--t-secondary); font-weight:var(--w-semibold); margin-bottom:var(--s2);}
+  .contact a{
+    display:flex; align-items:baseline; gap:var(--s2);
+    min-height:44px; padding:var(--s3) 0; font-size:var(--t-secondary); line-height:1.45;
+    text-decoration:none; overflow-wrap:anywhere;
+  }
+  .contact a:hover{color:var(--accent);}
+  .contact svg{flex:none; transform:translateY(2px);}
+  .skill{margin-bottom:var(--s4);}
+  .skill dt{font-size:var(--t-meta); line-height:1.4; color:var(--dim); margin-bottom:var(--s1);}
+  .skill dd{font-size:var(--t-secondary); line-height:1.5;}
+
+  /* main */
+  main{padding:var(--s16) var(--s12) var(--s16);}
+  .inner{max-width:760px;}
+  .lead{font-size:var(--t-h3); line-height:1.5; max-width:var(--prose);}
+  section{margin-top:var(--s16);}
+
+  .panel{
+    background:var(--raised); border:1px solid var(--border); border-radius:4px;
+    box-shadow:var(--panel-shadow);
+  }
+  .panel:hover{border-color:var(--border-hover);}
+
+  .stats{display:grid; grid-template-columns:repeat(4,1fr); margin-top:var(--s12);}
+  .stat{padding:var(--s6); border-right:1px solid var(--border);}
+  .stat:last-child{border-right:none;}
+  .stat .n{font-size:var(--t-stat); font-weight:var(--w-semibold); line-height:1.2; font-variant-numeric:tabular-nums;}
+  .stat .c{font-size:var(--t-secondary); line-height:1.5; color:var(--dim); margin-top:var(--s2);}
+
+  .role-head{display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:var(--s2); margin-bottom:var(--s6);}
+  .role-head .dates{font-size:var(--t-secondary); color:var(--dim);}
+
+  .bullets li{position:relative; padding-left:var(--s6); margin-bottom:var(--s4); max-width:var(--prose); color:var(--dim);}
+  .bullets li::before{content:""; position:absolute; left:var(--s1); top:.7em; width:8px; height:1px; background:var(--accent);}
+  .bullets b{color:var(--text); font-weight:var(--w-semibold);}
+
+  .project{padding:var(--s6); margin-top:var(--s4);}
+  .project:first-of-type{margin-top:0;}
+  .stackline{font-size:var(--t-secondary); color:var(--accent); margin:var(--s1) 0 var(--s4);}
+  .project .bullets li:last-child{margin-bottom:0;}
+  .badge-note{font-size:var(--t-secondary); font-weight:var(--w-regular); color:var(--dim);}
+
+  .edu{padding:var(--s6);}
+  .edu .sub{font-size:var(--t-secondary); color:var(--dim); margin-top:var(--s1);}
+  .awards{margin-top:var(--s6);}
+  .awards li{padding:var(--s3) 0; border-bottom:1px solid var(--border); font-size:var(--t-body); max-width:var(--prose);}
+  .awards li:last-child{border-bottom:none;}
+
+  .contact-panel{padding:var(--s8);}
+  .contact-panel h2{margin-bottom:var(--s2);}
+  .contact-panel p{color:var(--dim); max-width:50ch; margin-bottom:var(--s6);}
+  .btn{
+    display:inline-flex; align-items:center; min-height:44px; padding:var(--s3) var(--s6);
+    background:var(--accent); color:var(--on-accent); font-weight:var(--w-medium);
+    border-radius:4px; text-decoration:none; transition:opacity var(--m-150) var(--ease-out);
+  }
+  .btn:hover{opacity:.88;}
+  .foot-note{font-size:var(--t-secondary); color:var(--dim); margin-top:var(--s4);}
+
+  /* one entrance moment, transform + opacity only */
+  @keyframes enter{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;}}
+  aside h1,.role,.meta{opacity:0; animation:enter var(--m-300) var(--ease-out) forwards;}
+  .role{animation-delay:var(--m-100);}
+  .meta{animation-delay:var(--m-200);}
+  .lead{opacity:0; animation:enter var(--m-300) var(--ease-out) forwards; animation-delay:var(--m-100);}
+  @media (prefers-reduced-motion: reduce){
+    aside h1,.role,.meta,.lead{animation:none; opacity:1;}
+    .btn{transition:none;}
+  }
+
+  @media (max-width:900px){
+    .layout{grid-template-columns:minmax(0,1fr);}
+    aside{border-right:none; border-bottom:1px solid var(--border); padding:var(--s12) var(--s6) var(--s8);}
+    main{padding:var(--s12) var(--s6) var(--s12);}
+    .stats{grid-template-columns:1fr 1fr;}
+    .stat:nth-child(2){border-right:none;}
+    .stat:nth-child(-n+2){border-bottom:1px solid var(--border);}
+    .contact-panel{padding:var(--s6);}
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+  <aside>
+    <h1>Swapnil Tanpure</h1>
+    <div class="role">Software Engineer 1 at Zinnia</div>
+    <div class="meta">2+ years of experience, Pune, India</div>
+
+    <div class="side-block contact">
+      <h2 class="side-title" style="margin-bottom:0;">Contact</h2>
+      <a href="mailto:swapniltanpure74@gmail.com"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="1.5"/><path d="M3 6l9 7 9-7"/></svg>swapniltanpure74@gmail.com</a>
+      <a href="tel:+918329274355"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 5c0 8.284 6.716 15 15 15l3-4-6-3-2 2c-2.5-1.2-4.3-3-5.5-5.5l2-2-3-6-4 1.5z"/></svg>+91 83292 74355</a>
+    </div>
+
+    <div class="side-block">
+      <h2 class="side-title">Skills</h2>
+      <dl>
+        <div class="skill"><dt>Languages</dt><dd>Java, C#, JavaScript, SQL, PL/SQL</dd></div>
+        <div class="skill"><dt>Frameworks</dt><dd>Spring Boot, .NET Core, ReactJS, Node.js</dd></div>
+        <div class="skill"><dt>Technologies</dt><dd>Kafka, AWS S3, Event-Driven Architecture, REST APIs, CI/CD</dd></div>
+        <div class="skill"><dt>Databases</dt><dd>MongoDB, SQL Server</dd></div>
+        <div class="skill"><dt>Tools</dt><dd>Git, GitHub, Azure DevOps</dd></div>
+      </dl>
+    </div>
+  </aside>
+
+  <main>
+    <div class="inner">
+      <p class="lead">I build backend systems for financial-document processing and large-scale data infrastructure, with coding range across Java, C#, and Python. I own work end-to-end, from architecture through production support, and I mentor newly hired engineers as an onboarding buddy.</p>
+
+      <div class="stats panel">
+        <div class="stat"><div class="n">12M</div><div class="c">tax records kept accessible through vendor outages</div></div>
+        <div class="stat"><div class="n">197M+</div><div class="c">records synced with zero gaps through cutover</div></div>
+        <div class="stat"><div class="n">40%</div><div class="c">lower infrastructure cost across 700+ TB</div></div>
+        <div class="stat"><div class="n">&lt;1 hr</div><div class="c">backup time, down from 44+ hours</div></div>
+      </div>
+
+      <section id="experience">
+        <h2>Experience</h2>
+        <div class="role-head">
+          <h3>Zinnia, Software Engineer 1</h3>
+          <div class="dates">Apr 2024 to present, Pune, India</div>
+        </div>
+        <ul class="bullets">
+          <li>Improved financial-document processing reliability and audit readiness across <b>12M tax records (2015–2026)</b> by architecting Zinnia's first end-to-end event-driven integration with SOVOS, using resilient, asynchronous webhook-based transaction workflows.</li>
+          <li>Reduced third-party API dependency by <b>over 90%</b> by independently owning the design and delivery of the SOVOS integration, including architecture, security, and data-persistence decisions.</li>
+          <li>Maintained data integrity across <b>197M+ migrated financial and document records</b> by designing distributed data-store synchronization between legacy and modern systems.</li>
+          <li>Reduced infrastructure costs by <b>40%</b> and cut backup time from <b>44+ hours to under 1 hour</b> across 400M+ documents (700+ TB) with a .NET migration tool I built, including automated integrity checks.</li>
+        </ul>
+      </section>
+
+      <section id="projects">
+        <h2>Projects</h2>
+
+        <article class="project panel">
+          <h3>Enterprise Document Service (EDS)</h3>
+          <div class="stackline">Java, Spring Boot, Kafka, MongoDB</div>
+          <ul class="bullets">
+            <li>Enabled real-time cross-system communication with sub-second event propagation by designing Kafka-based event-driven pipelines with concurrent consumer processing.</li>
+            <li>Achieved zero data loss during a phased SQL-to-MongoDB migration by modeling entity relationships across both schemas and handling distributed data-consistency edge cases.</li>
+          </ul>
+        </article>
+
+        <article class="project panel">
+          <h3>SOVOS API Implementation</h3>
+          <div class="stackline">Java, Spring Boot, AWS S3, MongoDB, Event-Driven Architecture</div>
+          <ul class="bullets">
+            <li>Delivered Zinnia's first end-to-end event-driven tax integration, syncing the full tax-document lifecycle in real time through concurrent, multi-threaded webhook workflows that ingest metadata and PDFs from SOVOS APIs.</li>
+            <li>Improved audit readiness across about 12M tax forms by designing the persistence and archival layer across MongoDB and AWS S3.</li>
+          </ul>
+        </article>
+
+        <article class="project panel">
+          <h3>OnBase to EDS Migration</h3>
+          <div class="stackline">Java, Spring Boot, Kafka, MongoDB, SQL</div>
+          <ul class="bullets">
+            <li>Modernized document-management architecture and fully decommissioned the legacy indexing system by data-modeling the migration path from SQL-based storage to a MongoDB document store.</li>
+            <li>Maintained continuous synchronization for 197M+ records across a multi-phase transition, with zero sync gaps, using Kafka consumers for incremental document events and multi-indexed edge cases.</li>
+          </ul>
+        </article>
+
+        <article class="project panel">
+          <h3>AWS S3 Migration &amp; Storage Optimization</h3>
+          <div class="stackline">C#, .NET Framework, AWS S3, SQL Server</div>
+          <ul class="bullets">
+            <li>Reduced infrastructure costs by 40% across 400M+ documents (700+ TB) with an automated .NET migration tool that validates integrity as it runs.</li>
+            <li>Cut backup time from 44+ hours to under 1 hour by decoupling document storage from the database layer and integrating S3 with existing ingestion systems.</li>
+          </ul>
+        </article>
+
+        <article class="project panel">
+          <h3>Document Management System</h3>
+          <div class="stackline">C#, .NET 6, Entity Framework, ReactJS, Bootstrap</div>
+          <ul class="bullets">
+            <li>Improved internal usability across upload, retrieval, and classification flows with a responsive ReactJS frontend paired with secure, role-based REST APIs.</li>
+            <li>Reduced debugging time on production issues by adding structured logging and exception handling for better observability.</li>
+          </ul>
+        </article>
+
+        <article class="project panel">
+          <h3>EDS IntelliSplit Engine <span class="badge-note">Top 3, Zinnia Hackathon (34 teams)</span></h3>
+          <div class="stackline">Python, FastAPI, ReactJS, NER, AI/ML</div>
+          <ul class="bullets">
+            <li>Cut manual document-indexing effort by about 92%, from roughly 10 hours per batch to largely automated, with an NER-based engine that identifies policy numbers, dates, and document types.</li>
+            <li>Improved extraction accuracy over time with a FastAPI backend supporting reusable, document-specific model training and a React wizard for AI-assisted split review.</li>
+          </ul>
+        </article>
+      </section>
+
+      <section id="background">
+        <h2>Education and achievements</h2>
+        <div class="edu panel">
+          <h3>B.E., Computer Science and Engineering</h3>
+          <div class="sub">Amaravati University, Jul 2018 to May 2023, CGPA 8.2</div>
+          <ul class="awards">
+            <li>Top 3 in Zinnia's Zinnovate Hackathon (34 teams) for EDS IntelliSplit Engine</li>
+            <li>"Caught in the Act" Award, Zinnia</li>
+            <li>"Value Award," Zinnia, twice</li>
+            <li>Coding Ninjas: top 11%, 2242 contest rating</li>
+            <li>LeetCode: 250+ problems solved, 1600+ contest rating</li>
+            <li>HackerRank: Problem Solving (Basic) certificate</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="contact-panel panel">
+          <h2>Get in touch</h2>
+          <p>Open to backend, data infrastructure, and platform engineering roles.</p>
+          <a class="btn" href="mailto:swapniltanpure74@gmail.com">Email me</a>
+          <div class="foot-note">swapniltanpure74@gmail.com, +91 83292 74355</div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+
+</body>
+</html>
